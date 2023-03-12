@@ -10,5 +10,8 @@
 	@if(env('APP_ENV')=='local')
 	<a href="http://localhost:4200/register/confirm/{{$token}}">Klik link</a>
 	@endif
+	@if(env('APP_ENV')=='development')
+	<a href="https://cp-dev.crevtech.id/register/confirm/{{$token}}">Klik link</a>
+	@endif
 </body>
 </html>
