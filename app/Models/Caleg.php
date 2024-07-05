@@ -10,11 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract,JWTSubject
+class Caleg extends Model implements AuthenticatableContract, AuthorizableContract,JWTSubject
 {
-    use Authenticatable, Authorizable, HasFactory,SoftDeletes;
+    use Authenticatable, Authorizable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +23,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public $incrementing = false;
     protected $keyType = "string";
     protected $fillable = [
-        'caleg_id','position_id','name', 'email','no_hp','province','city','rt','rw','role','password','position_description','area_province','area_city','area_subdistrict','area_village'
+        'name', 'email','user_status','election_region','election_province','whatsapp','political_party','privacy_policy_agrement','password','status','no_urut'
     ];
 
     /**
@@ -60,13 +59,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         });
     }
 
-    function position()
+    function party()
     {
-        return $this->belongsTo('App\Models\Position');
-    }
-
-    function access_menu()
-    {
-        return $this->hasMany('App\Models\AccessMenu');
+        return $this->belongsTo('App\Models\Party','political_party','id');
     }
 }
